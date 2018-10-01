@@ -82,6 +82,8 @@ function DOMException(code, message) {
 };
 DOMException.prototype = Error.prototype;
 copy(ExceptionCode,DOMException)
+global.DOMException = DOMException;
+
 /**
  * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-536297177
  * The NodeList interface provides the abstraction of an ordered collection of nodes, without defining or constraining how this collection is implemented. NodeList objects in the DOM are live.
@@ -134,6 +136,9 @@ LiveNodeList.prototype.item = function(i){
 }
 
 _extends(LiveNodeList,NodeList);
+global.NodeList = NodeList;
+global.LiveNodeList = LiveNodeList;
+
 /**
  * 
  * Objects implementing the NamedNodeMap interface are used to represent collections of nodes that can be accessed by name. Note that NamedNodeMap does not inherit from NodeList; NamedNodeMaps are not maintained in any particular order. Objects contained in an object implementing NamedNodeMap may also be accessed by an ordinal index, but this is simply to allow convenient enumeration of the contents of a NamedNodeMap, and does not imply that the DOM specifies an order to these Nodes.
@@ -248,6 +253,8 @@ NamedNodeMap.prototype = {
 		return null;
 	}
 };
+global.NamedNodeMap = NamedNodeMap;
+
 /**
  * @see http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-102161490
  */
@@ -416,6 +423,7 @@ function _xmlEncoder(c){
 
 copy(NodeType,Node);
 copy(NodeType,Node.prototype);
+global.Node = Node;
 
 /**
  * @param callback return true for continue,false for break
@@ -705,7 +713,7 @@ Document.prototype = {
 	}
 };
 _extends(Document,Node);
-
+global.Document = Document;
 
 function Element() {
 	this._nsMap = {};
@@ -801,11 +809,13 @@ Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNa
 
 
 _extends(Element,Node);
+global.Element = Element;
+
 function Attr() {
 };
 Attr.prototype.nodeType = ATTRIBUTE_NODE;
 _extends(Attr,Node);
-
+global.Attr = Attr;
 
 function CharacterData() {
 };
@@ -838,6 +848,8 @@ CharacterData.prototype = {
 	}
 }
 _extends(CharacterData,Node);
+global.CharacterData = CharacterData;
+
 function Text() {
 };
 Text.prototype = {
@@ -857,6 +869,8 @@ Text.prototype = {
 	}
 }
 _extends(Text,CharacterData);
+global.Text = Text;
+
 function Comment() {
 };
 Comment.prototype = {
@@ -864,6 +878,7 @@ Comment.prototype = {
 	nodeType : COMMENT_NODE
 }
 _extends(Comment,CharacterData);
+global.Comment = Comment;
 
 function CDATASection() {
 };
@@ -872,39 +887,45 @@ CDATASection.prototype = {
 	nodeType : CDATA_SECTION_NODE
 }
 _extends(CDATASection,CharacterData);
-
+global.CDATASection = CDATASection;
 
 function DocumentType() {
 };
 DocumentType.prototype.nodeType = DOCUMENT_TYPE_NODE;
 _extends(DocumentType,Node);
+global.DocumentType = DocumentType;
 
 function Notation() {
 };
 Notation.prototype.nodeType = NOTATION_NODE;
 _extends(Notation,Node);
+global.Notation = Notation;
 
 function Entity() {
 };
 Entity.prototype.nodeType = ENTITY_NODE;
 _extends(Entity,Node);
+global.Entity = Entity;
 
 function EntityReference() {
 };
 EntityReference.prototype.nodeType = ENTITY_REFERENCE_NODE;
 _extends(EntityReference,Node);
+global.EntityReference = EntityReference;
 
 function DocumentFragment() {
 };
 DocumentFragment.prototype.nodeName =	"#document-fragment";
 DocumentFragment.prototype.nodeType =	DOCUMENT_FRAGMENT_NODE;
 _extends(DocumentFragment,Node);
-
+global.DocumentFragment = DocumentFragment;
 
 function ProcessingInstruction() {
 }
 ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
 _extends(ProcessingInstruction,Node);
+global.ProcessingInstruction = ProcessingInstruction;
+
 function XMLSerializer(){}
 XMLSerializer.prototype.serializeToString = function(node,isHtml,nodeFilter){
 	return nodeSerializeToString.call(node,isHtml,nodeFilter);
